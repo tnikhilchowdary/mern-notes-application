@@ -1,32 +1,14 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import "./index.css";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [notes, setNotes] = useState([]);
-
-
+  const [notes, setNotes] = useState("");
+  const [allNotes, setAllNotes] = useState([]);
+  
   return (
     <div>
-      <h1>Welcome to the Notes App</h1>
-      <form>
-        <div>
-        <input type="text"
-        placeholder="Enter Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        />
-        </div>
-        <textarea 
-        placeholder="content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        />
-        <div>
-        <button type="submit">Submit</button>
-        </div>
-      </form>
+      <h1>Welcome to The Notes App</h1>
     </div>
   );
 }
