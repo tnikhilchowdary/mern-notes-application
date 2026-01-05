@@ -33,9 +33,15 @@ function App() {
   }
 
   const handleDelete = async (id) => {
+    try{
+      const deleteResponse = await axios.delete(`http://localhost:5000/notes/${id}`)
+      fetchNotes();
+    }
+    catch(error){
 
+    }
   }
-  
+
   useEffect(() => {
     fetchNotes();
   }, [])
@@ -87,7 +93,7 @@ function App() {
           Edit
         </button>
 
-        <button
+        <button onClick={() => handleDelete(list._id)}
           className="text-red-500 border border-red-500 px-3 py-1 rounded-md
                      text-sm font-semibold hover:bg-red-500 hover:text-white
                      transition"
