@@ -4,6 +4,8 @@ import "./index.css";
 
 function App() {
   const [input, setInput] = useState("");
+  const [notesList, setNotesList] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,6 +21,22 @@ function App() {
       console.log("Error in adding Notes");
     }
   }
+
+  const fetchNotes = async (e) => {
+    try{
+      const response = await axios.get("http://localhost:5000/notes")
+      setNotesList(response.data);
+    }
+    catch(error){
+      console.log("Error Fetching Notes", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchNotes();
+  }, [])
+
+
   return (
     <div>
      <h1>Welome to the Notes App</h1>
@@ -30,6 +48,9 @@ function App() {
       />
       <button type="submit">Submit</button>
      </form>
+     <div>
+
+    </div>
     </div>
   );
 }
