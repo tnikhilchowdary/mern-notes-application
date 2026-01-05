@@ -32,6 +32,10 @@ function App() {
     }
   }
 
+  const handleDelete = async (id) => {
+
+  }
+  
   useEffect(() => {
     fetchNotes();
   }, [])
@@ -62,19 +66,38 @@ function App() {
         Submit
       </button>
     </form>
-
     <ul className="space-y-3">
-      {notesList.map((list) => (
-        <li
-          key={list._id}
-          className="bg-gray-50 border border-gray-200 rounded-lg 
-                     px-4 py-3 shadow-sm hover:shadow-md transition"
-        >
-          {list.notes}
-        </li>
-      ))}
-    </ul>
+  {notesList.map((list) => (
+    <li
+      key={list._id}
+      className="bg-gray-50 border border-gray-200 rounded-lg 
+                 px-4 py-3 shadow-sm hover:shadow-md transition
+                 flex items-center justify-between"
+    >
+      <span className="text-gray-800 font-medium">
+        {list.notes}
+      </span>
 
+      <div className="flex gap-3">
+        <button
+          className="text-blue-500 border border-blue-500 px-3 py-1 rounded-md
+                     text-sm font-semibold hover:bg-blue-500 hover:text-white
+                     transition"
+        >
+          Edit
+        </button>
+
+        <button
+          className="text-red-500 border border-red-500 px-3 py-1 rounded-md
+                     text-sm font-semibold hover:bg-red-500 hover:text-white
+                     transition"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  ))}
+</ul>
   </div>
 </div>
 
