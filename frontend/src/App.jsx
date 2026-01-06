@@ -5,6 +5,8 @@ import "./index.css";
 function App() {
   const [input, setInput] = useState("");
   const [notesList, setNotesList] = useState([]);
+  const [updateNotes, setUpdateNotes] = useState("");
+  const [updateId, setUpdateId] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,13 +34,26 @@ function App() {
     }
   }
 
+  const handleUpdate = async (id) => {
+    try{
+      await axios.put(`http://localhost:5000/notes/${id}`, {
+        notes:updateNotes,
+      });
+      fetchNotes();
+      setUpdateId(null);
+      setUpdateNotes("");
+    }
+    catch(error){
+      console.log("Error in Updating Notes");
+    }
+  }
   const handleDelete = async (id) => {
     try{
       const deleteResponse = await axios.delete(`http://localhost:5000/notes/${id}`)
       fetchNotes();
     }
     catch(error){
-
+      console.log("Error in Deleting Notes", error);
     }
   }
 
@@ -56,7 +71,7 @@ function App() {
     </h1>
 
     <form onSubmit={handleSubmit} className="flex gap-3 mb-6">
-      <input
+      <textarea
         type="text"
         placeholder="Enter Notes"
         value={input}
